@@ -8,16 +8,23 @@ const AddTask = ({ onAdd }) => {
   const onChangeTextHandler = (e) => {
     setText(e.target.value);
   };
-  const onChangeDateHandler =(e)=>{
-      setDay(e.target.value)
-  }
-  const onChangeCheckHandler =(e)=>{
-    setReminder(e.currentTarget.checked)
-}
+  const onChangeDateHandler = (e) => {
+    setDay(e.target.value);
+  };
+  const onChangeCheckHandler = (e) => {
+    setReminder(e.currentTarget.checked);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (!text) {
+      alert("Please Enter Text");
+      return;
+    }
     onAdd({ text, day, reminder });
+    setText("");
+    setDay("");
+    setReminder(true);
   };
 
   return (
@@ -33,11 +40,21 @@ const AddTask = ({ onAdd }) => {
       </div>
       <div className="form-control">
         <label>Day & Time</label>
-        <input type="text" placeholder="Add Day & Time" value={day}    onChange={onChangeDateHandler}  />
+        <input
+          type="text"
+          placeholder="Add Day & Time"
+          value={day}
+          onChange={onChangeDateHandler}
+        />
       </div>
       <div className="form-control form-control-check">
         <label>Set Reminder</label>
-        <input type="checkbox" checked={reminder} value={reminder}  onChange={onChangeCheckHandler} />
+        <input
+          type="checkbox"
+          checked={reminder}
+          value={reminder}
+          onChange={onChangeCheckHandler}
+        />
       </div>
 
       <input
